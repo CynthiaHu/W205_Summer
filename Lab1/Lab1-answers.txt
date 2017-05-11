@@ -1,0 +1,17 @@
+Q1: What is the difference between EBS and S3?
+Amazon Simple Storage Service (Amazon S3) is a scalable and low-cost Web-based service for storage. S3 automatically create copies on different devices across different locations for backup. For non-frequent used data, S3 offers archive service to lower the costs. Data persists only during the life of the instance.
+
+Amazon Elastic Block Store (Amazon EBS) provides persistent block level storage volumes for use with Amazon EC2 instances in the AWS Cloud. EBS is like virtual hard drive you can use with EC2 instances. It persists independently and can be attached to instances when needed. EBS is replicated within AZ and could be mounted to one EC2 in the same AZ. EBS has higher performance and suitable for bigger data size 
+
+
+Q2: When would you consider a cloud infrastructure for your data science tasks?
+When the data size is big and hard to predict, it's flexible to use a cloud infrastructure as you pay what you consume and there is no set-up cost either. It's also easy to scale up.
+
+
+Q3: What is the difference between spot instances and reserved instances?
+Spot instances: allow you to bid on the capacity currently not in use; the price varies based on the demand; you may get up to 92% discount compared with on-demand pricing; but there is potential for interruption.
+Reserved instances allow you to pay low hourly rate cost and make reservations of EC2 computing capacity for 1 or 3 years. You can resell the reservation to others in the market place if you don't need them. Can save up to 75% of total costs
+
+
+Q4: List the names of four software packages installed on the UCB AMI
+Hadoop, ipython,streamparse,pgxl-deployment-tools

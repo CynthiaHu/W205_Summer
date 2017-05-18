@@ -1,0 +1,24 @@
+
+1.List the HDFS contents of /user
+[w205@ip-172-31-16-74 ~]$ hdfs dfs -ls /user
+Found 8 items
+drwxr-xr-x   - mapred  supergroup          0 2017-05-18 18:41 /user/history
+drwxrwxrwx   - hive    supergroup          0 2017-05-18 18:41 /user/hive
+drwxrwxrwx   - hue     supergroup          0 2017-05-18 18:42 /user/hue
+drwxrwxrwx   - jenkins supergroup          0 2017-05-18 18:41 /user/jenkins
+drwxrwxrwx   - oozie   supergroup          0 2017-05-18 18:42 /user/oozie
+drwxrwxrwx   - root    supergroup          0 2017-05-18 18:42 /user/root
+drwxr-xr-x   - hdfs    supergroup          0 2017-05-18 18:43 /user/spark
+drwxr-xr-x   - w205    supergroup          0 2017-05-18 18:43 /user/w205
+
+
+2.Inspect the output of the HDFS admin report and answer the following questions in a text file.
+
+Q1: How many live datanodes are there?
+1
+
+Q2: How much non-DFS storage is used?
+5.05 GB
+
+Q3: How much DFS storage is used?
+137.38 MB

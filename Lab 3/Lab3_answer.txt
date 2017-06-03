@@ -1,0 +1,40 @@
+##Submissions:
+1.List the execution time of the weblog aggregation query for Hive, SparkSQL, and SparkSQL on Parquet.
+
+weblog aggregation query:
+	SELECT user_id, COUNT(user_id) AS log_count
+	FROM weblogs_schema GROUP BY user_id
+	ORDER BY log_count DESC
+	LIMIT 50;
+
+1) Hive
+Time taken: 52.134 seconds, Fetched: 50 row(s)
+
+2) SparkSQL
+Time taken: 9.133 seconds, Fetched 50 row(s)
+
+3) SparkSQL on Parquet
+Time taken: 3.285 seconds, Fetched 50 row(s)
+
+
+2.How many jobs does Hive launch? Does SparkSQL launch jobs?
+Assuming this question is related to the weblog aggregation query in question 1.
+
+1) Hive launches 2 jobs.
+
+2) SparkSQL doesn't launch jobs.
+
+
+3.Write a query which joins weblogs_parquet to user_info and counts the top 5 locations. List the locations.
+
+spark-sql> select b.location, count(b.location) as loc_count 
+		 > from weblogs_parquet as a join user_info as b on a.user_id=b.user_id 
+		 > group by b.location 
+		 > order by loc_count desc 
+		 > limit 5;
+La Fayette      49
+Leeds   47
+Blountsville    46
+Hayden  45
+Hamilton        45
+Time taken: 2.905 seconds, Fetched 5 row(s)

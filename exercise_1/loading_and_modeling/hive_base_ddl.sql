@@ -6,7 +6,7 @@ ProvideID string,
 HospitalName string,
 Address string,
 City string,
-[State] string,
+State string,
 ZIPCode string,
 CountyName string,
 PhoneNumber string,
@@ -22,7 +22,7 @@ WITH SERDEPROPERTIES (
 "escapeChar" = '\\'
 )
 STORED AS TEXTFILE
-LOCATION '/user/w205/hospital' ;
+LOCATION '/user/w205/hospital_compare/hospital' ;
 
 
 drop table effective;
@@ -33,7 +33,7 @@ ProviderID string,
 HospitalName string,
 Address string,
 City string,
-[State] string,
+State string,
 ZIPCode string,
 CountyName string,
 PhoneNumber string,
@@ -53,7 +53,7 @@ WITH SERDEPROPERTIES (
 "escapeChar" = '\\'
 )
 STORED AS TEXTFILE
-LOCATION '/user/w205/effective'   
+LOCATION '/user/w205/hospital_compare/effective'   
 ;
 
 
@@ -65,7 +65,7 @@ ProviderID string,
 HospitalName string,
 Address string,
 City string,
-[State] string,
+State string,
 ZIPCode string,
 CountyName string,
 PhoneNumber string,
@@ -88,7 +88,7 @@ WITH SERDEPROPERTIES (
 "escapeChar" = '\\'
 )
 STORED AS TEXTFILE
-LOCATION '/user/w205/readmission'   
+LOCATION '/user/w205/hospital_compare/readmission'   
 ;
 
 drop table measure;
@@ -110,7 +110,7 @@ WITH SERDEPROPERTIES (
 "escapeChar" = '\\'
 )
 STORED AS TEXTFILE
-LOCATION '/user/w205/measure'   
+LOCATION '/user/w205/hospital_compare/measure'   
 ;
 
 
@@ -122,7 +122,7 @@ ProviderID string,
 HospitalName string,
 Address string,
 City string,
-[State] string,
+State string,
 ZIPCode string,
 CountyName string,
 CommunicationwithNursesAchievementPoints string,
@@ -160,5 +160,5 @@ WITH SERDEPROPERTIES (
 "escapeChar" = '\\'
 )
 STORED AS TEXTFILE
-LOCATION '/user/w205/survey'   
+LOCATION '/user/w205/hospital_compare/survey'   
 ;

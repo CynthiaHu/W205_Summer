@@ -2,7 +2,7 @@ drop table hospital;
 
 create external table hospital
 (
-ProvideID string,
+ProviderID string,
 HospitalName string,
 Address string,
 City string,

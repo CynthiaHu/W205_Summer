@@ -1,0 +1,8 @@
+Add a text file called “best_hospitals.txt”
+3.3.1. Write your answer to the question about hospital quality of care and provide the table of 10 results which supports this.
+3.3.2. Your written answer should provide your conclusion, your justification for why this approach is appropriate and why these results support your conclusion
+
+What hospitals are models of high-quality care? That is, which hospitals have the most consistently high scores for a variety of procedures.
+
+
+

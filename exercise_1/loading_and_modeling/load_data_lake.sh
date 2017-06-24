@@ -1,6 +1,8 @@
 # assuming already start hadoop, postgres and metastore
 # and switch to w205 user
 
+cd $HOME
+
 # Get data into EC2 instance
 mkdir hospital_files
 cd hospital_files/

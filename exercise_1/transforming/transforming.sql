@@ -1,17 +1,41 @@
 --Don't Indent
---step 1 - transform effective tables
+--step 0 - exclude invalid state from hospital dimension table
+Drop table hospital_filtered;
 
+Create table hospital_filtered
+as 
+select *
+from hospital
+where State not in ('AS','DC','GU','MP','PR','VI');
+
+--step 1 - transform effective tables
 --filter effective table with valid score
 Drop table effective_filtered;
 
 CREATE TABLE effective_filtered
 AS 
-SELECT e.*
-,cast (e.score as float) as score_float
+SELECT e.providerid
+,h.hospitalname
+,h.address
+,h.city
+,h.state
+,h.zipcode
+,h.countyname
+,h.phonenumber
 ,h.hospitaltype
-,h.EmergencyServices
+,h.emergencyservices
+,e.condition
+,e.measureid
+,m.measurename
+,e.score
+,e.sample
+,e.footnote
+,m.measurestartdate
+,m.measureenddate 
+,cast (e.score as float) as score_float
 From effective as e
-join hospital as h on e.providerid = h.providerid
+join hospital_filtered as h on e.providerid = h.providerid
+join measure as m on e.measureid = m.measureid
 Where e.score <> 'Not Available' and e.measureid <> 'EDV'
 and (e.condition <> 'Emergency Department' or h.emergencyservices <>'No');
 
@@ -66,9 +90,28 @@ Drop table readmission_filtered;
 
 CREATE TABLE readmission_filtered
 AS 
-SELECT *
-, cast (score as float) as score_float 
-From readmission
+SELECT r.providerid
+,h.hospitalname
+,h.address
+,h.city
+,h.state
+,h.zipcode
+,h.countyname
+,h.phonenumber
+,r.measureid
+,m.measurename
+,r.comparedtonational 
+,r.denominator
+,r.score
+,r.lowerestimate
+,r.higherestimate
+,r.footnote
+,m.measurestartdate
+,m.measureenddate 
+,cast (r.score as float) as score_float 
+From readmission as r
+join hospital_filtered as h on r.providerid = h.providerid
+join measure as m on r.measureid = m.measureid
 Where score <> 'Not Available' and score <= 100;
 
 --aggregate readmission score by measures
@@ -102,47 +145,47 @@ providerid
 ,state;
 
 --Step 3. JOIN/Combine Effective and Readmission hospital tables to get final score by hospital
+--calculate hospital score variability across all measures
+Drop table hospital_volatility;
+
+Create table hospital_volatility
+as
+select a.providerid
+,stddev(a.stand_score) as std_score
+,count(a.measureid) as measure_count
+from
+(select providerid
+,measureid
+,stand_score
+from effective_standard
+union all
+select providerid
+,measureid
+,score_float as stand_score
+from readmission_filtered) a
+group by a.providerid;
+
 -- for effective score (0-100), the higher the better; 
 -- for readmission measures (0-100), the lower the rates the better;
 -- thus define final score = effective score - readmission score
+-- use inner join as if the hospital just has one type of score, it will be excluded from the comparison 
 
--- keep all records from both tables; use union and aggregation strategy instead of 
--- full outer join to simplify the process
--- use simple average of effective score standard deviation and readmission score standard deviation
--- for the hospital overall score volatility instead of calculate standard deviation across different types of measures directly
 Drop table hospital_final_score;
 
 Create table hospital_final_score
 As
-Select providerid
-,hospitalname
-,state
-,sum(effective_score) as effective_score
-,sum(readmission_score) as readmission_score
-,sum(effective_score)-sum(readmission_score) as final_score
-,(sum(std_effective_score)+sum(std_readmission_score))/2.0 as avg_std
-from
-(Select providerid
-,hospitalname
-,state
-,avg_effective_score as effective_score
-,std_effective_score
-,0 as readmission_score
-,0 as std_readmission_score
-From hospital_effective_score
-Union All
-Select providerid
-,hospitalname
-,state
-,0 as effective_score
-,0 as std_effective_score
-,avg_readmission_score as readmission_score
-,std_readmission_score
-From hospital_readmission_score) a
-Group by 
-providerid
-,hospitalname
-,state;
+select e.providerid
+,e.hospitalname
+,e.state
+,e.avg_effective_score as effective_score
+,r.avg_readmission_score as readmission_score
+,e.avg_effective_score-r.avg_readmission_score as final_score
+,v.std_score
+from hospital_effective_score as e
+join hospital_readmission_score as r on e.providerid=r.providerid
+join hospital_volatility as v on r.providerid=v.providerid
+where v.std_score > 0;
+--exclude zero variability as these hospitals only have one measure with valid score
 
 
 --aggreagte final score by state

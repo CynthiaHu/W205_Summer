@@ -11,9 +11,11 @@ select s.providerid
 ,h.hospitaltype
 ,h.hospitalownership
 ,h.emergencyservices
-,s.final_score as average_quality_score
-,s.std_final_score as score_variability
+,round(s.effective_score,2) as effective_score
+,round(s.readmission_score,2) as readmission_score
+,round(s.final_score,2) as average_quality_score
+,round(s.std_score,2) as score_variability
 from hospital_final_score as s
 join hospital as h on s.providerid=h.providerid
-order by s.final_score desc
+order by average_quality_score desc, score_variability asc
 limit 10;

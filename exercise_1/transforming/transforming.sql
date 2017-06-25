@@ -181,6 +181,7 @@ select e.providerid
 ,r.avg_readmission_score as readmission_score
 ,e.avg_effective_score-r.avg_readmission_score as final_score
 ,v.std_score
+,v.measure_count
 from hospital_effective_score as e
 join hospital_readmission_score as r on e.providerid=r.providerid
 join hospital_volatility as v on r.providerid=v.providerid

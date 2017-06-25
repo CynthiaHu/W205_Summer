@@ -1,1 +1,19 @@
-Which procedures have the greatest variability between hospitals?
+Below are top 10 procedures or measures having the greatest variability between hospitals. It's ranked by score variability.
+
+measureid       scorevariability        averagescore    measurename     												measurestartdate			measureenddate
+OP_23   		21.84   				66.76   		Head CT Scan Results for Acute Ischemic Stroke or Hemorrhagic Stroke Patients who Received Head CT or MRI Scan Interpretation Within 45 Minutes of ED Arrival     2013-10-01 00:00:00     2014-09-30 00:00:00
+STK_4   		21.43   				83.22   		Thrombolytic Therapy    										2013-10-01 00:00:00     	2014-09-30 00:00:00
+OP_2    		18.05   				70.25   		Fibrinolytic Therapy Received Within 30 Minutes of ED Arrival   2013-10-01 00:00:00      	2014-09-30 00:00:00
+VTE_5   		16.21   				88.94   		Venous Thromboembolism Warfarin Therapy Discharge Instructions  2013-10-01 00:00:00      	2014-09-30 00:00:00
+VTE_1   		15.27   				89.13   		Venous Thromboembolism Prophylaxis      						2013-10-01 00:00:00     	2014-09-30 00:00:00
+STK_8   		13.83   				90.59   		Stroke Education        										2013-10-01 00:00:00     	2014-09-30 00:00:00
+OP_3b   		13.34   				27.49   		Median Time to Transfer to Another Facility for Acute Coronary Intervention- Reporting Rate      2013-10-01 00:00:00     2014-09-30 00:00:00
+IMM_2   		11.9    				91.77   		Influenza Immunization  										2013-10-01 00:00:00     	2014-03-31 00:00:00
+OP_1    		11.82   				40.63   		Median Time to Fibrinolysis     								2013-10-01 00:00:00     	2014-09-30 00:00:00
+OP_20   		11.71   				19.57   		Median Time from ED Arrival to Provider Contact for ED patients 2013-10-01 00:00:00      	2014-09-30 00:00:00
+
+
+For each measure, average score is the average of all hospital scores for this specific measure.
+Similaly, measure score variability is the standard deviation of all hospital scores for this specific measure.
+As the results are derived from hospital records, all transforming and cleaning steps for hospital records are implied.
+

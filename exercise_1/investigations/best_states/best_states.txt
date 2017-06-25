@@ -1,1 +1,18 @@
-What states are models of high-quality care?
+Below is a list of state which are models of high-quality care.
+State final_score is the average of all hospitals' avarege final score in that state. 
+Again for each hospital, final score = average effective score - average readmission score
+
+state   final_score     hospital_count
+VT      72.4    		14
+NE      67.38   		70
+DE      66.53   		7
+NH      65.13   		26
+ID      64.53   		29
+ME      64.22   		34
+NJ      62.82   		65
+CT      62.58   		30
+CA      62.33   		321
+AZ      62.22   		74
+
+
+As state result is aggregated from hospital final score table, all transforming and cleaning steps for hospital records are also applied to this result sets.

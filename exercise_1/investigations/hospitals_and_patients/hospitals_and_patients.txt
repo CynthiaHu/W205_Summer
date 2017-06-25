@@ -1,1 +1,14 @@
-Are average scores for hospital quality or procedural variability correlated with patient survey responses?
+I'm investigating whether average scores for hospital quality or procedural variability are correlated with patient survey responses.
+There are 32 questions in the survey. Though there is no detailed document of all columns in the survey response dataset,
+I think HCAHPSBaseScore is the aggregated score reflecting hospital quality and HCAHPSConsistencyScore is the aggregated score reflecting the response variability.
+Thus, these two score fields are used in the correlation analysis.
+
+As survey table is by hospital, I use hospital_final_score and survey table to calculate correlation coefficients between final_score, score_variability, BaseScore and ConsistencyScore.
+Below is the result.
+
+score_correlation       variability_correlation
+-0.0111 				0.1684
+
+
+We can see that the average score has slight low negative correlation with patient survey response (-1.1%)
+but survey response variability does reflect the procedural variability as the correlation coefficient is almost 17%.

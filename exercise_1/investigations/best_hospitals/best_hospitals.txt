@@ -1,8 +1,43 @@
-Add a text file called “best_hospitals.txt”
-3.3.1. Write your answer to the question about hospital quality of care and provide the table of 10 results which supports this.
-3.3.2. Your written answer should provide your conclusion, your justification for why this approach is appropriate and why these results support your conclusion
+Below is a list of top 10 hospitals of high-quality care. It's ranked first by final score in descending order and then score variability in ascending order.
+It means that we want to find hospitals with high quality score but low score volatility.
 
-What hospitals are models of high-quality care? That is, which hospitals have the most consistently high scores for a variety of procedures.
+providerid      measurecount    effectivescore  readmissionscore        averagequalityscore      scorevariability        state   hospitalownership       emergencyservices       hospitaltype     		hospitalname
+190268  		5       		100.0   		4.8     				95.2    				38.08   				LA      Proprietary     		No      				Acute Care Hospitals     LAFAYETTE GENERAL SURGICAL HOSPITAL
+390307  		3       		100.0   		5.0     				95.0    				44.78   				PA      Physician       		No      				Acute Care Hospitals     EDGEWOOD SURGICAL HOSPITAL
+050769  		7       		99.4    		7.0     				92.4    				41.82   				CA      Proprietary     		No      				Acute Care Hospitals     HOAG ORTHOPEDIC INSTITUTE
+170183  		7       		100.0   		8.25    				91.75   				41.53   				KS      Proprietary     		No      				Acute Care Hospitals     KANSAS SURGERY & RECOVERY CENTER
+280127  		7       		99.6    		8.15    				91.45   				41.39   				NE      Proprietary     		No      				Acute Care Hospitals     LINCOLN SURGICAL HOSPITAL
+430091  		7       		99.8    		8.7     				91.1    				41.23   				SD      Proprietary     		No      				Acute Care Hospitals     BLACK HILLS SURGICAL HOSPITAL LLP
+450875  		7       		99.6    		8.55    				91.05   				41.2    				TX      Proprietary     		Yes     				Acute Care Hospitals     QUAIL CREEK SURGICAL HOSPITAL
+520205  		7       		99.4    		8.45    				90.95   				41.17   				WI      Voluntary non-profit - Private  No       		Acute Care Hospitals    MIDWEST ORTHOPEDIC SPECIALTY HOSPITAL
+110200  		8       		99.83   		9.0     				90.83   				39.39   				GA      Proprietary     		No      				Acute Care Hospitals     NORTHSIDE MEDICAL CENTER
+340049  		7       		99.8    		9.0     				90.8    				41.09   				NC      Proprietary     		No      				Acute Care Hospitals     NORTH CAROLINA SPECIALTY HOSPITAL
+
+
+
+To evaluate ovarall care quality of hospitals, I used two different types of measures: one type is related to timely and effective care
+and another type is about readmission and death.
+1) timely and effective care measures how quickly hospitals treat patients who come to the hospital with certain medical emergencies; 
+	and how well hospitals provide preventive services. 
+	The higher the score, the better.
+2) readmission and death measures unplanned readmission to any acute care hospital within 30 days of discharge from a hospitalization or
+	estimates of deaths within 30-days of a hospital admission from any cause related to medical conditions. 
+	The lower the rate, the better.
+	
+The final score of a hospital is equal to average effective score - average readmission score. Each average score is the average of multiple measures' score in that type.
+As the sample size varies across measures and hospitals, especially some measures having very big sizes, simple average instead of weighted average is used.
+
+Measures of effective care have different ranges which seems not typo error but reasonable scores for certain measures. Thus, all measures of effective care are scaled to
+be in range [0, 100]. Readmission measures rates or score are already in [0, 100] range.
+
+Hospital score variability is the standard deviation of all measure scores for this hospital.
+
+In addition, below cleaning is applied before average and final score is calculated:
+1. exclude score ='Not available' records.
+2. exclude measureid = 'EDV' whose score shows Emergency department volume range, not a real score
+3. exclude records of hospitals which don't have Emergency Services but have scores related to Emergency Department.
+4. exclude records with invalid state names. 
+5. exclude hospitals only having one measure with valid score
 
 
 

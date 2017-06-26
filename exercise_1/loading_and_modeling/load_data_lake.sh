@@ -7,7 +7,8 @@ cd $HOME
 mkdir hospital_files
 cd hospital_files/
 wget -O Hospital_Revised_Flatfiles.zip http://data.medicare.gov/views/bg9k-emty/files/Nqcy71p9Ss2RSBWDmP77H1DQXcyacr2khotGbDHHW_s?content_type=application%2Fzip%3B%20charset%3Dbinary&filename=Hospital_Revised_Flatfiles.zip
-# need user click Enter when run it step by step to make sure download is complete before start unzip
+# need to wait and then click Enter when run it step by step to make sure download is complete before start unzip
+sleep 60
 echo -ne '\n'
 unzip Hospital_Revised_Flatfiles.zip
 # ls

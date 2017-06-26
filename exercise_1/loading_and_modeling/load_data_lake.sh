@@ -7,11 +7,12 @@ cd $HOME
 mkdir hospital_files
 cd hospital_files/
 wget -O Hospital_Revised_Flatfiles.zip http://data.medicare.gov/views/bg9k-emty/files/Nqcy71p9Ss2RSBWDmP77H1DQXcyacr2khotGbDHHW_s?content_type=application%2Fzip%3B%20charset%3Dbinary&filename=Hospital_Revised_Flatfiles.zip
-# need to wait and then click Enter when run it step by step to make sure download is complete before start unzip
+
+# wait for 60 seconds before execute unzip command to make sure download is complete
 sleep 60
 echo -ne '\n'
 unzip Hospital_Revised_Flatfiles.zip
-# ls
+ls
 
 # Put relevant files into HDFS
 # first, remove space in the file name

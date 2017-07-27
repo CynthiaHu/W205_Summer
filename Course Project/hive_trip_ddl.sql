@@ -6,8 +6,8 @@ create external table taxi_trip_raw
 (
 TripID    string,
 TaxiID    string,
-TripStartTime    timestamp,
-TripEndTime    timestamp,
+TripStartTime    string,
+TripEndTime    string,
 TripSeconds    float,
 TripMiles    float,
 PickupTract    string,
@@ -38,4 +38,4 @@ WITH SERDEPROPERTIES (
 "escapeChar" = '\\'
 )
 STORED AS TEXTFILE
-LOCATION '/user/w205/taxi_trip_project/taxi_trip' ;
+LOCATION '/user/w205/taxi_trip_project/taxi_trip';

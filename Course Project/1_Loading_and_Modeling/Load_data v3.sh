@@ -1,7 +1,7 @@
 # assuming already start hadoop, postgres and metastore
 # to save file in /data folder where 100GB+ EBS volume attached
 # run as a root user to avoid any permission issues 
-
+cd $HOME
 cd /data
 mkdir taxi_trip
 cd taxi_trip/

@@ -25,7 +25,7 @@ STATION
 ,cast(TOBS as float) as TOBS
 ,TOBS_ATTRIBUTES
 from weather_raw
-where from_unixtime(unix_timestamp(DATE,'MM/dd/yyyy'),'yyyy-MM-dd') >= '2015-01-01'
+where from_unixtime(unix_timestamp(DATE,'MM/dd/yyyy'),'yyyy-MM-dd') >= '2015-06-01'
 and PRCP <> '' --and SNOW <> '' and SNWD <> '' and TOBS <> ''
 ;
 

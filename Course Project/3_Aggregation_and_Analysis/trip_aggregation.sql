@@ -18,7 +18,6 @@ group by DATE;
 
 
 --details taxi trip data with weather for python forecast
---without filtering, 2M rows
 --but need to include 2 years' data to catch seasonality (month)
 drop table taxi_trip_fcst;
 create table taxi_trip_fcst
@@ -49,6 +48,7 @@ select t.TaxiID
 ,sum(Fare)/sum(TripMinutes) as FarePerMinute
 from taxi_trip as t
 left join daily_weather as w on t.TripStartDate = w.Date
+where t.TripStartDate >= '2015-06-01'
 group by t.TaxiID
 ,t.TripStartYear
 ,t.TripStartMonth
@@ -93,7 +93,8 @@ from
 ,sum(Fare)/sum(TripMinutes) as FarePerMinute
 from taxi_trip
 group by TripStartDate) as t
-left join daily_weather as w on t.TripStartDate = w.Date;
+left join daily_weather as w on t.TripStartDate = w.Date
+where t.TripStartDate >= '2015-06-01';
 
 
 --Trip by Pickup Dropoff Area
@@ -117,6 +118,7 @@ select PickupCommunity
 ,sum(Fare)/sum(TripMinutes) as FarePerMinute
 from taxi_trip
 --where pickupcommunity <> '' and dropoffcommunity <> ''
+where TripStartDate >= '2015-06-01'
 group by PickupCommunity
 ,DropoffCommunity;
 
@@ -138,7 +140,7 @@ select PickupCommunity
 ,sum(TripMinutes)/count(distinct TaxiID) as DurationPerDriver
 ,sum(Fare)/sum(TripMinutes) as FarePerMinute
 from taxi_trip
-where pickupcommunity <> ''
+where pickupcommunity <> '' and TripStartDate >= '2015-06-01'
 group by PickupCommunity;
 
 --Trip by Drop Off Area
@@ -158,7 +160,7 @@ select DropoffCommunity
 ,sum(TripMinutes)/count(distinct TaxiID) as DurationPerDriver
 ,sum(Fare)/sum(TripMinutes) as FarePerMinute
 from taxi_trip
-where dropoffcommunity <> ''
+where dropoffcommunity <> '' and TripStartDate >= '2015-06-01'
 group by DropoffCommunity;
 
 
@@ -183,6 +185,7 @@ select TripStartYear
 ,sum(TripMinutes)/count(distinct TaxiID) as DurationPerDriver
 ,sum(Fare)/sum(TripMinutes) as FarePerMinute
 from taxi_trip
+where TripStartDate >= '2015-06-01'
 group by TripStartYear
 ,TripStartMonth
 ,TripStartDay
@@ -209,6 +212,7 @@ round(TripMinutes,0) as TripMinutes
 ,sum(Fare) as TotalFare
 ,NTILE(10) over (order by TripMinutes) as quantile
 from taxi_trip
+where TripStartDate >= '2015-06-01'
 group by TripMinutes) t
 group by t.quantile;
 

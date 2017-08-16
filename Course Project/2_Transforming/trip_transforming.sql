@@ -71,7 +71,7 @@ TripID
 ,DropoffLocation
 ,CommunityAreas
 from taxi_trip_raw
-where Year(from_unixtime(unix_timestamp(TripStartTime,'MM/dd/yyyy hh:mm:ss a'),'yyyy-MM-dd HH:mm:ss')) >= 2015
+where To_Date(from_unixtime(unix_timestamp(TripStartTime,'MM/dd/yyyy hh:mm:ss a'),'yyyy-MM-dd HH:mm:ss')) >= '2015-06-01'
 ;
 
 --check data type

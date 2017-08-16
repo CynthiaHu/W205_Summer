@@ -13,7 +13,7 @@ sc = SparkContext("local", "simple app")
 sqlContext = HiveContext(sc)
 # there are some warnings but it should be ok
 # input data
-rdd = sqlContext.sql("select * from taxi_trip_fcst limit 2000")
+rdd = sqlContext.sql("select * from taxi_trip_fcst where TripStartYear >=2016 limit 5000")
 df_trip = rdd.toPandas()
 # new data for forecast
 rdd2 = sqlContext.sql("select * from new_data")
@@ -64,8 +64,8 @@ train_pred_fa = rdg2.predict(X_train)
 
 # forecast new dataset
 # this would be a mock up for the dashboard
-df_new['pickupcommunity']=df1['pickupcommunity'].astype(str)
-df_new['tripstartmonth']=df1['tripstartmonth'].astype(str)
+df_new['pickupcommunity']=df_new['pickupcommunity'].astype(str)
+df_new['tripstartmonth']=df_new['tripstartmonth'].astype(str)
 # convert the new data to the same structure as training data
 other = ['tripstartdate','startdate_str']
 df_new_dummy = pd.get_dummies(df_new[categorical])
@@ -78,8 +78,8 @@ new_pred_du = rdg.predict(df2_new)
 new_pred_fa = rdg2.predict(df2_new)
 
 # combine forecast with original new data set
-df_new = df_new.dropna()
-df_new['DurationFcst'] = new_pred_du
+df_new = df_new[df_new['weekday'] != '']
+df_new['DurationFcst'] = new_pred_du #372
 df_new['FareFcst'] = new_pred_fa
 # due to linear regression limitation, some forecast are negative
 # override negative forecast with zero

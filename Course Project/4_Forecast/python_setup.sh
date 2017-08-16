@@ -15,9 +15,9 @@ python3.4 -m pip install sklearn
 python3.4 -m pip install scipy
 
 # before start pyspark, set up the python version
-cd /data
-su - w205
-export PYSPARK_PYTHON=python3
-/data/spark15/bin/pyspark
+# cd /data
+# su - w205
+# export PYSPARK_PYTHON=python3
+# /data/spark15/bin/pyspark
 
 
